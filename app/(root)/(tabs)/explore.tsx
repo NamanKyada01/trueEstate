@@ -1,5 +1,5 @@
-import {View, Text} from "react-native";
-import React from "react";
+import { View, Text } from 'react-native'
+import React from 'react'
 
 const Explore = () => {
     return (
@@ -8,4 +8,4 @@ const Explore = () => {
         </View>
     )
 }
-export default Explore;
+export default Explore
