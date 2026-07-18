@@ -6,6 +6,9 @@ import { set } from 'yaml/dist/schema/yaml-1.1/set';
 
 const Filters = () => {
     const params = useLocalSearchParams<{ filter?: string }>();
+
+    console.log('params', params);
+
     const [selectedCategory, setSelectedCategory] = useState(
         params.filter || 'All'
     );

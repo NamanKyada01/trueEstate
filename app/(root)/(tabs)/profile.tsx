@@ -14,6 +14,7 @@ import images from '@/constants/images';
 import { settings } from '@/constants/data';
 import { useGlobalContext } from '@/lib/global-provider';
 import { logout } from '@/lib/appwrite';
+import { router } from 'expo-router';
 
 interface SettingsItemProps {
     icon: ImageSourcePropType;
@@ -60,6 +61,37 @@ const Profile = () => {
         }
     };
 
+    const navigateToScreen = (title: string) => {
+        switch (title) {
+            case 'My Bookings':
+                router.push('/(root)/my-bookings');
+                break;
+            case 'Payments':
+                router.push('/(root)/payments');
+                break;
+            case 'Profile':
+                router.push('/(root)/profile-details');
+                break;
+            case 'Notifications':
+                router.push('/(root)/notifications');
+                break;
+            case 'Security':
+                router.push('/(root)/security');
+                break;
+            case 'Language':
+                router.push('/(root)/language');
+                break;
+            case 'Help Center':
+                router.push('/(root)/help-center');
+                break;
+            case 'Invite Friends':
+                router.push('/(root)/invite-friends');
+                break;
+            default:
+                break;
+        }
+    };
+
     return (
         <SafeAreaView className="h-full bg-white">
             <ScrollView
@@ -76,25 +108,37 @@ const Profile = () => {
                             source={{ uri: user?.avatar }}
                             className="size-44 relative rounded-full"
                         />
-                        <TouchableOpacity className="absolute bottom-11 right-2">
-                            <Image source={icons.edit} className="size-9" />
+                        <TouchableOpacity onPress={() => router.push('/(root)/profile-details')} className="absolute bottom-11 right-2 bg-white rounded-full shadow-sm p-2">
+                            <Image source={icons.edit} className="size-6" />
                         </TouchableOpacity>
                         <Text className="text-2xl font-rubik-bold mt-2">
                             {user?.name}
                         </Text>
                     </View>
                 </View>
-                <View className="flxe flex-col mt-10">
-                    <SettingItem icon={icons.calendar} title="My Booking" />
-                    <SettingItem icon={icons.wallet} title="Payemt" />
+                <View className="flex flex-col mt-10">
+                    <SettingItem 
+                        icon={icons.calendar} 
+                        title="My Bookings" 
+                        onPress={() => navigateToScreen('My Bookings')}
+                    />
+                    <SettingItem 
+                        icon={icons.wallet} 
+                        title="Payments" 
+                        onPress={() => navigateToScreen('Payments')}
+                    />
                 </View>
-                <View className="flxe flex-col mt-5 border-t pt-5 border-primary-200">
+                <View className="flex flex-col mt-5 border-t pt-5 border-primary-200">
                     {settings.slice(2).map((item, index) => (
-                        <SettingItem key={index} {...item} />
+                        <SettingItem 
+                            key={index} 
+                            {...item} 
+                            onPress={() => navigateToScreen(item.title)}
+                        />
                     ))}
                 </View>
 
-                <View className="flxe flex-col mt-5 border-t pt-5 border-primary-200">
+                <View className="flex flex-col mt-5 border-t pt-5 border-primary-200">
                     <SettingItem
                         icon={icons.logout}
                         title="Logout"

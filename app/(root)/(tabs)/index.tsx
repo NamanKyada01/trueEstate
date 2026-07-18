@@ -19,8 +19,6 @@ import seed from '@/lib/seed';
 import { useAppwrite } from '@/lib/useAppwrite';
 import { getLatestProperties, getProperties } from '@/lib/appwrite';
 import { useEffect } from 'react';
-import filters from '@/components/Filters';
-import limit from 'ajv-formats/src/limit';
 import NoResults from '@/components/NoResults';
 
 export default function Index() {
@@ -45,7 +43,7 @@ export default function Index() {
         },
         skip: true,
     });
-
+    console.log('properties', user);
     useEffect(() => {
         refetch({ filter: params.filter!, query: params.query!, limit: 6 });
     }, [params.filter, params.query]);
