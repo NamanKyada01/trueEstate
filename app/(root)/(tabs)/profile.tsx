@@ -15,6 +15,7 @@ import { settings } from '@/constants/data';
 import { useGlobalContext } from '@/lib/global-provider';
 import { logout } from '@/lib/appwrite';
 import { router } from 'expo-router';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 
 interface SettingsItemProps {
     icon: ImageSourcePropType;
@@ -102,7 +103,7 @@ const Profile = () => {
                     <Text className="text-x1 font-rubik-bold">Profile </Text>
                     <Image source={icons.bell} className="size-5" />
                 </View>
-                <View className="flex-row justify-center flex mt-5">
+                <Animated.View entering={FadeInDown.delay(100).duration(500)} className="flex-row justify-center flex mt-5">
                     <View className="flex flex-col items-center relative mt-5">
                         <Image
                             source={{ uri: user?.avatar }}
@@ -115,8 +116,8 @@ const Profile = () => {
                             {user?.name}
                         </Text>
                     </View>
-                </View>
-                <View className="flex flex-col mt-10">
+                </Animated.View>
+                <Animated.View entering={FadeInDown.delay(200).duration(500)} className="flex flex-col mt-10">
                     <SettingItem 
                         icon={icons.calendar} 
                         title="My Bookings" 
@@ -127,8 +128,8 @@ const Profile = () => {
                         title="Payments" 
                         onPress={() => navigateToScreen('Payments')}
                     />
-                </View>
-                <View className="flex flex-col mt-5 border-t pt-5 border-primary-200">
+                </Animated.View>
+                <Animated.View entering={FadeInDown.delay(300).duration(500)} className="flex flex-col mt-5 border-t pt-5 border-primary-200">
                     {settings.slice(2).map((item, index) => (
                         <SettingItem 
                             key={index} 
@@ -136,9 +137,9 @@ const Profile = () => {
                             onPress={() => navigateToScreen(item.title)}
                         />
                     ))}
-                </View>
+                </Animated.View>
 
-                <View className="flex flex-col mt-5 border-t pt-5 border-primary-200">
+                <Animated.View entering={FadeInDown.delay(400).duration(500)} className="flex flex-col mt-5 border-t pt-5 border-primary-200">
                     <SettingItem
                         icon={icons.logout}
                         title="Logout"
@@ -146,7 +147,7 @@ const Profile = () => {
                         showArrow={false}
                         onPress={handleLogout}
                     />
-                </View>
+                </Animated.View>
             </ScrollView>
         </SafeAreaView>
     );

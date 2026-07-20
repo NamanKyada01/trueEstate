@@ -18,6 +18,14 @@ const MyBookings = () => {
             price: '$5000',
         },
         {
+            id: '4',
+            property: 'Oceanview Penthouse',
+            date: 'Nov 22, 2026',
+            status: 'Upcoming',
+            image: propertiesImages[1],
+            price: '$8500',
+        },
+        {
             id: '2',
             property: 'Modern Apartment',
             date: 'Sep 10, 2026',

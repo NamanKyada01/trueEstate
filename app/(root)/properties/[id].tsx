@@ -12,6 +12,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 
 import icons from '@/constants/icons';
 import images from '@/constants/images';
+import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import Comment from '@/components/Comment';
 import { facilities } from '@/constants/data';
 
@@ -36,7 +37,8 @@ const Property = () => {
                 showsVerticalScrollIndicator={false}
                 contentContainerClassName="pb-32 bg-white"
             >
-                <View
+                <Animated.View
+                    entering={FadeInDown.duration(500)}
                     className="relative w-full"
                     style={{ height: windowHeight / 2 }}
                 >
@@ -77,9 +79,9 @@ const Property = () => {
                             </View>
                         </View>
                     </View>
-                </View>
+                </Animated.View>
 
-                <View className="px-5 mt-7 flex gap-2">
+                <Animated.View entering={FadeInUp.delay(200).duration(500)} className="px-5 mt-7 flex gap-2">
                     <Text className="text-2xl font-rubik-extrabold">
                         {property?.name}
                     </Text>
@@ -275,10 +277,10 @@ const Property = () => {
                             </View>
                         </View>
                     )}
-                </View>
+                </Animated.View>
             </ScrollView>
 
-            <View className="absolute bg-white bottom-0 w-full rounded-t-2xl border-t border-r border-l border-primary-200 p-7">
+            <Animated.View entering={FadeInUp.delay(400).duration(500)} className="absolute bg-white bottom-0 w-full rounded-t-2xl border-t border-r border-l border-primary-200 p-7">
                 <View className="flex flex-row items-center justify-between gap-10">
                     <View className="flex flex-col items-start">
                         <Text className="text-black-200 text-xs font-rubik-medium">
@@ -301,7 +303,7 @@ const Property = () => {
                         </Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </Animated.View>
         </View>
     );
 };

@@ -11,6 +11,7 @@ import { Link, router, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import images from '@/constants/images';
 import icons from '@/constants/icons';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import Search from '@/components/Search';
 import { Card, FeaturedCard } from '@/components/Cards';
 import Filters from '@/components/Filters';
@@ -56,11 +57,13 @@ export default function Explore() {
             {/*<Button title="Seed" onPress={seed} />*/}
             <FlatList
                 data={properties}
-                renderItem={({ item }) => (
-                    <Card
-                        item={item}
-                        onPress={() => handleCardPress(item.$id)}
-                    />
+                renderItem={({ item, index }) => (
+                    <Animated.View entering={FadeInDown.delay(index * 100).duration(500).springify()}>
+                        <Card
+                            item={item}
+                            onPress={() => handleCardPress(item.$id)}
+                        />
+                    </Animated.View>
                 )}
                 keyExtractor={(item) => item.$id}
                 numColumns={2}
@@ -78,7 +81,7 @@ export default function Explore() {
                     )
                 }
                 ListHeaderComponent={
-                    <View className="px-5">
+                    <Animated.View entering={FadeInDown.duration(500)} className="px-5">
                         <View className="flex flex-row items-center justify-between mt-5">
                             <TouchableOpacity
                                 onPress={() => router.back()}
@@ -103,7 +106,7 @@ export default function Explore() {
                                 Found {properties?.length} Properties
                             </Text>
                         </View>
-                    </View>
+                    </Animated.View>
                 }
             />
         </SafeAreaView>
